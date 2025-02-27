@@ -17,3 +17,42 @@ console.log(
 );
 
 console.log("알맞은 스크립트를 작성하세요");
+
+document.addEventListener("DOMContentLoaded", function () {
+    const commentTextarea = document.querySelector("textarea");
+    const commentList = document.querySelector(".comment-list");
+    const submitButton = document.querySelector("button[type='button']");
+
+    function addComment() {
+        const commentText = commentTextarea.value.trim();
+
+        if (commentText === "") {
+            alert("댓글을 입력해주세요.");
+            return;
+        }
+
+        // 새로운 댓글 요소 생성
+        const newComment = document.createElement("li");
+        newComment.innerHTML = `
+            <div class="comment-item">
+                <div class="comment-author">
+                    <img src="./images/comment-author-icon.png" alt="사용자 프로필 이미지"/>
+                    <span>방문자</span>
+                </div>
+                <div class="comment-content">${commentText}</div>
+            </div>
+        `;
+
+        // 댓글 리스트에 추가
+        commentList.appendChild(newComment);
+
+        // ✅ 댓글 등록 완료 메시지 표시
+        alert("댓글이 등록되었습니다.");
+
+        // 입력창 초기화
+        commentTextarea.value = "";
+    }
+
+    // "등록" 버튼 클릭 시 댓글 추가
+    submitButton.addEventListener("click", addComment);
+});
